@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Flashcards de révision 3e : EMC chapitre 1, les règles du jeu démocratique.">
+<meta name="theme-color" content="#1E3A8A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Révise EMC1">
+<meta name="format-detection" content="telephone=no">
+<title>Flashcards EMC Démocratie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout : une colonne centrée façon « boîte à fiches bristol ». Les cartes sont des fiches lignées, chaque thème a sa couleur d'onglet. */
+:root{
+  --paper:#E8EBEE; --card:#FFFFFF; --ink:#18202C; --ink-2:#4F5B6B; --line:#CBD3DC;
+  --rule:#C9DAEE; --margin:#E6A3A3; --accent:#1E3A8A; --accent-ink:#FFFFFF; --gold:#A86A0C;
+  --ok:#15803D; --mid:#B45309; --ko:#B91C1C; --shadow:rgba(24,32,44,.12);
+  --c-mots:#0F766E; --c-textes:#BE185D; --c-princ:#B42318; --c-inst:#1D4ED8; --c-ue:#A15C07; --c-approf:#7C3AED; --c-methode:#4D7C0F;
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#10151C; --card:#19212B; --ink:#E7EBF0; --ink-2:#9DA9B8; --line:#2C3746;
+  --rule:#22334A; --margin:#5C2E2E; --accent:#9DB7FF; --accent-ink:#0E1626; --gold:#E3B252;
+  --ok:#4ADE80; --mid:#FBBF24; --ko:#F87171; --shadow:rgba(0,0,0,.45);
+  --c-mots:#2DD4BF; --c-textes:#F472B6; --c-princ:#F87171; --c-inst:#7EA6FF; --c-ue:#F0B429; --c-approf:#B794F6; --c-methode:#A3E635;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#10151C; --card:#19212B; --ink:#E7EBF0; --ink-2:#9DA9B8; --line:#2C3746;
+  --rule:#22334A; --margin:#5C2E2E; --accent:#9DB7FF; --accent-ink:#0E1626; --gold:#E3B252;
+  --ok:#4ADE80; --mid:#FBBF24; --ko:#F87171; --shadow:rgba(0,0,0,.45);
+  --c-mots:#2DD4BF; --c-textes:#F472B6; --c-princ:#F87171; --c-inst:#7EA6FF; --c-ue:#F0B429; --c-approf:#B794F6; --c-methode:#A3E635;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:20px 56px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.muted{color:var(--ink-2)}
+
+/* ---------- Barre du haut ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.tab-h2{font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1;padding:6px 9px 4px;border:2.5px solid var(--ink);border-radius:4px;letter-spacing:.02em;display:grid;justify-items:center}
+.tab-h2 small{font-size:12px;letter-spacing:.12em;font-family:var(--f-mono);font-weight:600}
+.brand-txt{min-width:0}
+.brand-txt b{display:block;font-family:var(--f-display);font-weight:800;font-size:21px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase}
+.brand-txt span{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+.navbtns{display:flex;gap:8px}
+.ghost{background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.ghost:hover{border-color:var(--ink-2)}
+
+/* ---------- Tableau de bord ---------- */
+.dash{background:var(--card);border-radius:14px;box-shadow:0 1px 0 var(--line),0 10px 30px -18px var(--shadow);padding:20px;display:grid;gap:18px}
+.player{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.lvl{width:66px;height:66px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);font-family:var(--f-display);font-weight:900;font-size:32px;line-height:1;position:relative}
+.lvl small{position:absolute;bottom:-8px;font-family:var(--f-mono);font-size:10px;background:var(--card);color:var(--ink);border:1.5px solid var(--accent);border-radius:999px;padding:1px 7px;letter-spacing:.06em}
+.pinfo{flex:1;min-width:200px}
+.pname{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pname h2{font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase;letter-spacing:.01em}
+.xpbar{height:12px;border-radius:999px;background:var(--paper);overflow:hidden;margin-top:8px;border:1px solid var(--line)}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:999px;transition:width .6s ease}
+.xptxt{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12px;color:var(--ink-2);margin-top:4px;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.stat b{display:block;font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--ink-2);line-height:1.25;display:block;margin-top:3px}
+.stat.ready b{color:var(--ok)}
+.stat.fire b{color:var(--mid)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:26px 0 10px;flex-wrap:wrap}
+.sec-title h3{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+
+/* Thèmes = onglets de boîte à fiches */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.theme{--c:var(--accent);text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px 12px 10px;display:grid;gap:6px;position:relative;transition:border-color .15s,transform .15s}
+.theme:hover{transform:translateY(-1px)}
+.theme[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 7%,var(--card))}
+.theme .th-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.theme .th-name{font-weight:700;font-size:15.5px;line-height:1.2;color:var(--ink)}
+.chk{width:20px;height:20px;border-radius:5px;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.theme[aria-pressed="true"] .chk{background:var(--c);border-color:var(--c)}
+.theme[aria-pressed="true"] .chk::after{content:"";width:10px;height:5px;border-left:2.5px solid var(--card);border-bottom:2.5px solid var(--card);transform:rotate(-45deg) translate(1px,-1px)}
+.th-meta{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mbar{height:6px;border-radius:999px;background:var(--paper);overflow:hidden}
+.mbar i{display:block;height:100%;background:var(--c);border-radius:999px}
+.theme .dot{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block;margin-right:7px;vertical-align:1px}
+
+/* Modes */
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.modes{grid-template-columns:1fr}}
+.mode{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.mode h4{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.mode p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.4}
+.seg{display:flex;gap:4px;background:var(--paper);border-radius:999px;padding:3px;width:max-content;max-width:100%}
+.seg.wrapseg{flex-wrap:wrap;border-radius:14px;width:auto}
+.mode{min-width:0}
+.mode .go{margin-top:auto}
+.seg button{border:0;background:transparent;border-radius:999px;padding:4px 11px;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px var(--shadow)}
+.go{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:11px 14px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,filter .12s}
+.go:hover{filter:brightness(1.08)}
+.go:active{transform:scale(.98)}
+.go.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.go[disabled]{opacity:.45;cursor:not-allowed}
+.review-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;border-radius:10px;border:1.5px dashed var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 6%,var(--card))}
+.review-banner p{margin:0;font-size:14.5px;min-width:0}
+.review-banner .go{background:var(--ko);color:var(--card)}
+.badge-strip{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- Session ---------- */
+.sess-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.prog{flex:1;height:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .35s ease}
+.sess-count{font-family:var(--f-mono);font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.combo{font-family:var(--f-display);font-weight:900;font-size:19px;color:var(--mid);min-width:64px;text-align:right;letter-spacing:.02em}
+.combo.pop{animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.35)}}
+
+.stage{perspective:1600px}
+.flip{display:grid;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.25,1);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.flip.flipped{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border-radius:14px;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);min-height:340px;display:flex;flex-direction:column;overflow:hidden;--c:var(--accent)}
+.face.back{transform:rotateY(180deg)}
+/* fiche bristol : lignes bleues + marge rouge */
+.ruled{flex:1;display:flex;flex-direction:column;padding:22px 22px 18px 44px;position:relative;
+  background-image:linear-gradient(var(--card) 0 0),repeating-linear-gradient(to bottom,transparent 0 27px,var(--rule) 27px 28px);
+  background-size:2px 100%,100% 100%;background-repeat:no-repeat;background-position:30px 0,0 6px}
+.ruled::before{content:"";position:absolute;left:32px;top:0;bottom:0;width:1.5px;background:var(--margin)}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-bottom:3px solid var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 9%,var(--card))}
+.ftag{font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.fbox{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);display:flex;gap:3px;align-items:center}
+.fbox i{width:8px;height:8px;border-radius:2px;background:var(--line);display:inline-block}
+.fbox i.on{background:var(--c)}
+.q{font-weight:700;font-size:clamp(21px,3.6vw,28px);line-height:1.3;margin:auto 0;text-wrap:balance;padding-block:18px}
+.hint{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);text-align:center;letter-spacing:.04em;margin-top:auto}
+.ans-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c);font-weight:600}
+.ans{font-weight:700;font-size:clamp(18px,2.8vw,22px);line-height:1.35;margin:4px 0 10px}
+.det{font-size:15.5px;line-height:1.6;margin:0 0 12px;color:var(--ink)}
+.det ul{margin:4px 0;padding-left:20px}
+.plus{margin-top:auto;border-radius:10px;padding:10px 12px;background:var(--card);background:color-mix(in srgb,var(--c-approf) 8%,var(--card));border:1px solid color-mix(in srgb,var(--c-approf) 30%,var(--card));font-size:14.5px;line-height:1.5}
+.plus b.lab{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-approf);margin-bottom:2px}
+.qback{font-size:13.5px;color:var(--ink-2);margin:0 0 6px;font-style:italic}
+
+.rate{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.rate button{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:12px 8px;font-weight:700;font-size:15px;display:grid;gap:2px;justify-items:center;transition:transform .1s}
+.rate button small{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--ink-2)}
+.rate button:active{transform:scale(.97)}
+.rate .r0{border-color:var(--ko);color:var(--ko)}
+.rate .r1{border-color:var(--mid);color:var(--mid)}
+.rate .r2{border-color:var(--ok);color:var(--ok)}
+.rate .r0:hover{background:var(--card);background:color-mix(in srgb,var(--ko) 8%,var(--card))}
+.rate .r1:hover{background:var(--card);background:color-mix(in srgb,var(--mid) 8%,var(--card))}
+.rate .r2:hover{background:var(--card);background:color-mix(in srgb,var(--ok) 8%,var(--card))}
+.reveal{margin-top:14px;width:100%}
+.keys{text-align:center;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);margin-top:10px}
+@media (hover:none){.keys{display:none}}
+.xpfloat{position:fixed;left:50%;top:40%;transform:translateX(-50%);font-family:var(--f-display);font-weight:900;font-size:38px;color:var(--gold);pointer-events:none;animation:xpf .9s ease forwards;z-index:30;text-shadow:0 2px 0 var(--card)}
+@keyframes xpf{0%{opacity:0;transform:translate(-50%,10px)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-60px)}}
+
+/* QCM */
+.qcm-opts{display:grid;gap:10px;margin-top:14px}
+.opt{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.4;display:flex;gap:12px;align-items:flex-start}
+.opt .l{font-family:var(--f-mono);font-weight:600;width:26px;height:26px;flex:none;border-radius:6px;display:grid;place-items:center;background:var(--paper);font-size:13px}
+.opt:hover:not([disabled]){border-color:var(--ink-2)}
+.opt.good{border-color:var(--ok);background:var(--card);background:color-mix(in srgb,var(--ok) 10%,var(--card))}
+.opt.bad{border-color:var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 10%,var(--card))}
+.opt[disabled]{cursor:default}
+.feedback{margin-top:12px;border-radius:12px;padding:12px 14px;background:var(--card);border-left:5px solid var(--ok);font-size:15px}
+.feedback.ko{border-left-color:var(--ko)}
+.feedback b.v{display:block;font-family:var(--f-display);font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+.timer{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:-2px}
+.timer i{display:block;height:100%;background:var(--gold);width:100%}
+
+/* Qui fait quoi ? */
+.tri-consigne{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0}
+.tri-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.cat{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:16px 10px;font-weight:700;font-size:16.5px;line-height:1.25;display:grid;gap:4px;justify-items:center;text-align:center;transition:transform .1s}
+.cat small{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--ink-2)}
+.cat:hover:not([disabled]){border-color:var(--ink-2)}
+.cat:active:not([disabled]){transform:scale(.97)}
+.cat.good{border-color:var(--ok);background:var(--card);background:color-mix(in srgb,var(--ok) 12%,var(--card))}
+.cat.bad{border-color:var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 12%,var(--card))}
+.cat[disabled]{cursor:default}
+.tri-sum{display:grid;gap:6px}
+.tri-sum div{display:flex;justify-content:space-between;gap:10px;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14.5px}
+.tri-sum div b{white-space:nowrap;color:var(--ok)}
+
+/* Fin de session */
+.endcard{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);display:grid;gap:16px}
+.endcard h2{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vw,44px);text-transform:uppercase;line-height:1}
+.endstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:560px){.endstats{grid-template-columns:repeat(2,1fr)}}
+.endstats .stat b.k{color:var(--ko)} .endstats .stat b.m{color:var(--mid)} .endstats .stat b.o{color:var(--ok)} .endstats .stat b.x{color:var(--gold)}
+.miss{display:grid;gap:8px}
+.miss details{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;--c:var(--accent)}
+.miss summary{cursor:pointer;font-weight:700;font-size:15px;list-style-position:outside}
+.miss summary .ftag{margin-right:8px}
+.miss details p{margin:8px 0 0;font-size:15px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row .go{flex:1;min-width:180px}
+
+/* Badges */
+.medal{width:92px;display:grid;justify-items:center;gap:6px;text-align:center}
+.medal .disc{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 55%,var(--card)),var(--gold));color:var(--card);box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 0 0 3px var(--card),0 0 0 5px var(--gold)}
+.medal .disc svg{width:30px;height:30px}
+.medal span{font-size:12px;font-weight:700;line-height:1.2}
+.medal.locked .disc{background:var(--paper);color:var(--ink-2);box-shadow:inset 0 0 0 2px var(--line);opacity:.8}
+.medal.locked span{color:var(--ink-2);font-weight:400}
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.bitem{display:flex;gap:12px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px}
+.bitem .medal{width:auto}
+.bitem .medal .disc{width:52px;height:52px}
+.bitem .medal .disc svg{width:24px;height:24px}
+.bitem b{display:block;font-size:15px}
+.bitem p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.35}
+.bitem.locked b{color:var(--ink-2)}
+.bilan{background:var(--card);border-radius:14px;padding:20px;border:2px solid var(--ink);display:grid;gap:12px;position:relative;overflow:hidden}
+.bilan .stamp{position:absolute;right:14px;top:14px;transform:rotate(8deg);border:3px solid var(--ok);color:var(--ok);font-family:var(--f-display);font-weight:900;font-size:18px;text-transform:uppercase;padding:2px 10px;border-radius:6px;letter-spacing:.04em}
+.bilan h2{font-family:var(--f-display);font-weight:900;font-size:28px;text-transform:uppercase;padding-right:120px}
+.tbars{display:grid;gap:7px}
+.tbar{display:grid;grid-template-columns:170px 1fr 44px;gap:10px;align-items:center;font-size:14px;--c:var(--accent)}
+.tbar .mbar{height:9px}
+.tbar b{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.tbar{grid-template-columns:120px 1fr 40px;font-size:13px}}
+.danger{background:none;border:1.5px solid var(--ko);color:var(--ko);border-radius:8px;padding:7px 12px;font-weight:700;font-size:13.5px}
+.confirm-box{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(140%);background:var(--ink);color:var(--paper);border-radius:14px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;z-index:40;transition:transform .45s cubic-bezier(.2,.9,.3,1.2);max-width:calc(100% - 32px);box-shadow:0 12px 30px -10px var(--shadow)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .medal .disc{width:46px;height:46px;box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--gold)}
+.toast .medal .disc svg{width:22px;height:22px}
+.toast small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.toast b{font-size:16px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:35}
+.foot{margin-top:34px;font-size:12.5px;color:var(--ink-2);text-align:center;font-family:var(--f-mono)}
+.fade-in{animation:fin .3s ease}
+@keyframes fin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .flip{transform:none!important}
+  .face.back{transform:none}
+  .flip .face.back{visibility:hidden}
+  .flip.flipped .face.front{visibility:hidden}
+  .flip.flipped .face.back{visibility:visible}
+}
+
+.plan{display:grid;gap:8px;margin-top:2px}
+.plan>div{border-radius:8px;padding:8px 10px;background:var(--card);background:color-mix(in srgb,var(--c-methode) 7%,var(--card));border:1px solid color-mix(in srgb,var(--c-methode) 25%,var(--card));line-height:1.45}
+.plan>div b{display:block;font-size:.95em}
+.plan .pl-i{background:transparent;border-style:dashed}
+.plan .pl-p b{color:var(--c-methode);text-transform:uppercase;letter-spacing:.02em}
+
+.how{margin-top:16px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px}
+.how h3{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 14px}
+.how ol{margin:0;padding:0;list-style:none;counter-reset:st;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 22px}
+.how li{counter-increment:st;font-size:15px;line-height:1.45;display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;min-width:0;padding:10px 12px;border-radius:10px;background:var(--paper)}
+.how li::before{content:counter(st);width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:19px;line-height:1}
+.how li span{text-wrap:pretty;padding-top:4px}
+.how li b{color:var(--accent)}
+.how p{margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink-2);text-wrap:pretty}
+@media (max-width:640px){.how ol{grid-template-columns:1fr}}
+
+button,.flip,.opt,.cat,.theme{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.flip{-webkit-user-select:none;user-select:none}
+#actions{position:sticky;bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--paper) 70%,transparent);z-index:3}
+#actions .rate,#actions .reveal{margin-top:10px}
+@media (max-height:520px){
+  .face{min-height:200px}
+  .q{padding-block:8px;font-size:20px}
+  .ruled{padding-top:12px;padding-bottom:10px}
+  .wrap{padding-block:10px 30px}
+  .rate button{padding:8px 6px}
+}
+@media (min-width:760px) and (max-width:1100px){.themes{grid-template-columns:repeat(4,1fr)}}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:3px 10px 3px 8px}
+.chip svg{color:var(--accent);flex:none}
+</style>
+</head>
+<body>
+<script>
+/* Adresse du récepteur Google Sheets (statistiques anonymes) */
+window.EMC1_STATS_URL = "https://script.google.com/macros/s/AKfycbyyIpY59EXu05C_mLzop50w94Vpw6fELQXTQHtWFP5DZQ3N7KXNg0njtVo8RPXj_DIG/exec";
+</script>
+<main class="wrap" id="app" aria-live="polite"></main>
+<noscript><p style="padding:16px">Active JavaScript pour utiliser les flashcards.</p></noscript>
+<script>
+const THEMES = {
+  mots:    {label:"Mots à savoir expliquer",   short:"Définition",     color:"var(--c-mots)"},
+  textes:  {label:"Textes, dates et symboles", short:"Textes et symboles", color:"var(--c-textes)"},
+  princ:   {label:"Valeurs et principes",      short:"Principes",      color:"var(--c-princ)"},
+  inst:    {label:"Les institutions françaises", short:"Institutions", color:"var(--c-inst)"},
+  ue:      {label:"La démocratie et l'Europe", short:"Europe",         color:"var(--c-ue)"},
+  approf:  {label:"Comparer et expliquer",     short:"Approfondir",    color:"var(--c-approf)"}
+};
+
+/* t = thème, g = groupe QCM, q = question, a = réponse, d = corrigé détaillé,
+   p = pour aller plus loin, s = réponse courte (QCM) */
+const CARDS = [
+/* ================= MOTS À SAVOIR EXPLIQUER ================= */
+{id:"m1",t:"mots",g:"def",q:"Définis : <b>valeur</b>",a:"Qualité fondamentale pour une société, pensée comme devant être défendue.",d:"Exemples : <b>liberté</b>, <b>égalité</b>, <b>fraternité</b>, <b>dignité</b>.",s:"Qualité fondamentale pour une société, qui doit être défendue"},
+{id:"m2",t:"mots",g:"def",q:"Définis : <b>principe</b>",a:"Règle qui régit les lois d'un État.",d:"La République française est <b>indivisible</b>, <b>laïque</b>, <b>démocratique</b> et <b>sociale</b>.",p:"Ne confonds pas : une <b>valeur</b> est un idéal (la liberté), un <b>principe</b> est une règle de fonctionnement (la laïcité).",s:"Règle qui régit les lois d'un État"},
+{id:"m3",t:"mots",g:"def",q:"Définis : <b>laïcité</b>",a:"Neutralité et indépendance de l'État vis-à-vis de la religion. Elle garantit à tous la liberté de croire ou de ne pas croire et de pratiquer sa religion (liberté de culte).",d:"Elle repose sur la loi de séparation des Églises et de l'État de <b>1905</b>.",p:"À l'école publique, les élèves ne peuvent pas porter de signes religieux ostensibles (loi de 2004).",s:"Neutralité de l'État vis-à-vis des religions, qui garantit la liberté de croire ou de ne pas croire"},
+{id:"m4",t:"mots",g:"def",q:"Définis : <b>démocratie</b>",a:"Régime politique dans lequel le pouvoir (la souveraineté) appartient au peuple et où les gouvernants sont désignés par des élections.",d:"Le mot vient du grec <i>dêmos</i> (le peuple) et <i>kratos</i> (le pouvoir).",s:"Régime où le pouvoir appartient au peuple et où les gouvernants sont élus"},
+{id:"m5",t:"mots",g:"def",q:"Définis : <b>souveraineté nationale</b>",a:"Le pouvoir politique appartient à la Nation, au peuple, aux citoyens.",d:"Le peuple l'exerce par ses <b>représentants élus</b> et par le <b>référendum</b>.",s:"Le pouvoir politique appartient à la Nation, au peuple"},
+{id:"m6",t:"mots",g:"def",q:"Définis : <b>Constitution</b>",a:"Texte qui organise le fonctionnement et les pouvoirs politiques d'un État et qui garantit les droits fondamentaux des individus.",d:"En France, c'est la Constitution de la Ve République, adoptée en <b>1958</b>.",p:"C'est le texte le plus important : toutes les lois doivent la respecter.",s:"Texte qui organise les pouvoirs d'un État et garantit les droits fondamentaux"},
+{id:"m7",t:"mots",g:"def",q:"Définis : <b>pouvoir exécutif</b>",a:"Pouvoir de faire exécuter les lois, c'est-à-dire de les appliquer sur le territoire national.",d:"En France : le <b>président de la République</b> et le <b>gouvernement</b> (Premier ministre et ministres).",s:"Pouvoir de faire exécuter, appliquer les lois"},
+{id:"m8",t:"mots",g:"def",q:"Définis : <b>pouvoir législatif</b>",a:"Pouvoir de discuter et de voter les lois.",d:"En France : le <b>Parlement</b>, formé de l'Assemblée nationale et du Sénat.",s:"Pouvoir de discuter et de voter les lois"},
+{id:"m9",t:"mots",g:"def",q:"Définis : <b>démocratie représentative</b>",a:"Régime dans lequel les citoyens élisent librement des représentants qui exercent le pouvoir et votent les lois en leur nom.",d:"Exemple : les citoyens élisent les députés, qui votent les lois.",p:"Dans une démocratie <b>directe</b>, les citoyens décident eux-mêmes, par exemple par référendum.",s:"Les citoyens élisent des représentants qui votent les lois en leur nom"},
+{id:"m10",t:"mots",g:"def",q:"Définis : <b>référendum</b>",a:"Vote par lequel les citoyens répondent directement par oui ou par non à une question ou à un projet de loi.",d:"C'est une forme de démocratie directe. En France, le président de la République peut décider d'un référendum.",p:"La Constitution de 1958 elle-même a été adoptée par référendum.",s:"Vote où les citoyens répondent directement par oui ou par non"},
+{id:"m11",t:"mots",g:"def",q:"Définis : <b>pluralisme</b>",a:"Existence de plusieurs partis politiques et de médias libres, qui permettent d'exprimer des opinions différentes.",d:"Sans pluralisme, il n'y a pas de vrai choix lors des élections.",p:"Dans un régime totalitaire, au contraire, il n'y a qu'un parti unique.",s:"Existence de plusieurs partis politiques et de médias libres"},
+{id:"m12",t:"mots",g:"def",q:"Définis : <b>séparation des pouvoirs</b>",a:"Les différents pouvoirs (exécutif, législatif, judiciaire) sont confiés à des institutions différentes.",d:"Elle est garantie par la Constitution. Elle empêche qu'une seule personne ait tous les pouvoirs.",p:"Cette idée a été défendue par le philosophe Montesquieu au XVIIIe siècle.",s:"Les pouvoirs sont confiés à des institutions différentes"},
+{id:"m15",t:"mots",g:"def",q:"Définis : <b>citoyenneté européenne</b>",a:"Elle concerne toute personne qui a la nationalité d'un État membre de l'Union européenne. Elle s'ajoute à la nationalité, elle ne la remplace pas.",d:"Tous les Français sont donc aussi citoyens européens.",s:"Statut de toute personne ayant la nationalité d'un État de l'UE"},
+{id:"m17",t:"mots",g:"def",q:"Définis : <b>parité</b>",a:"Égal accès des femmes et des hommes aux mandats électoraux et aux fonctions politiques.",d:"C'est l'une des révisions de la Constitution qui ont renforcé la démocratie.",p:"La parité a été inscrite dans la Constitution en 1999.",s:"Égal accès des femmes et des hommes aux mandats électoraux"},
+{id:"r1",t:"mots",g:"mot",q:"Quel mot désigne : « neutralité de l'État vis-à-vis des religions » ?",a:"La laïcité.",s:"Laïcité"},
+{id:"r2",t:"mots",g:"mot",q:"Quel mot désigne : « pouvoir de discuter et de voter les lois » ?",a:"Le pouvoir législatif.",s:"Pouvoir législatif"},
+{id:"r3",t:"mots",g:"mot",q:"Quel mot désigne : « pouvoir de faire appliquer les lois » ?",a:"Le pouvoir exécutif.",s:"Pouvoir exécutif"},
+{id:"r4",t:"mots",g:"mot",q:"Quel mot désigne : « texte qui organise les pouvoirs d'un État et garantit les droits fondamentaux » ?",a:"La Constitution.",s:"Constitution"},
+{id:"r5",t:"mots",g:"mot",q:"Quel mot désigne : « plusieurs partis politiques et des médias libres » ?",a:"Le pluralisme.",s:"Pluralisme"},
+{id:"r6",t:"mots",g:"mot",q:"Quel mot désigne : « le pouvoir politique appartient à la Nation » ?",a:"La souveraineté nationale.",s:"Souveraineté nationale"},
+{id:"r7",t:"mots",g:"mot",q:"Quel mot désigne : « les citoyens élisent des représentants qui votent les lois en leur nom » ?",a:"La démocratie représentative.",s:"Démocratie représentative"},
+
+/* ================= TEXTES, DATES ET SYMBOLES ================= */
+{id:"x1",t:"textes",g:"annee",q:"En quelle année est adoptée la <b>Déclaration des droits de l'homme et du citoyen</b> (DDHC) ?",a:"1789",d:"Elle proclame que les hommes naissent et demeurent libres et égaux en droits. Elle garantit notamment la liberté, la propriété et la sûreté.",p:"Elle fait toujours partie de nos textes fondamentaux : la Constitution de 1958 y fait référence.",s:"1789"},
+{id:"x2",t:"textes",g:"annee",q:"En quelle année est votée la <b>loi de séparation des Églises et de l'État</b> ?",a:"1905",d:"L'État ne reconnaît ni ne finance aucune religion, et garantit la liberté de conscience : c'est la base de la <b>laïcité</b>.",s:"1905"},
+{id:"x3",t:"textes",g:"annee",q:"En quelle année est adoptée la <b>Constitution de la Ve République</b> ?",a:"1958",d:"Elle a été voulue par le général de Gaulle et adoptée par référendum. Elle organise encore aujourd'hui nos institutions.",p:"Elle a été modifiée (révisée) plus de vingt fois depuis 1958.",s:"1958"},
+{id:"x4",t:"textes",g:"annee",q:"En quelle année est adoptée la <b>Charte de l'environnement</b> ?",a:"2004",d:"Elle reconnaît le droit de chacun à vivre dans un environnement équilibré et respectueux de la santé.",p:"Elle a été ajoutée à la Constitution en 2005 : protéger l'environnement est devenu un droit fondamental.",s:"2004"},
+{id:"x5",t:"textes",g:null,q:"Quel texte est adopté en <b>1905</b> ?",a:"La loi de séparation des Églises et de l'État.",d:"Elle fonde la laïcité : l'État est neutre et chacun est libre de croire ou de ne pas croire."},
+{id:"x6",t:"textes",g:null,q:"Quel texte est adopté en <b>2004</b> ?",a:"La Charte de l'environnement.",d:"Avec la DDHC (1789) et la Constitution (1958), elle fait partie des textes qui garantissent nos droits."},
+{id:"x7",t:"textes",g:"symb",q:"Quelle est la <b>devise</b> de la République française ?",a:"« Liberté, Égalité, Fraternité ».",d:"Elle est inscrite sur le fronton des mairies et des écoles.",s:"« Liberté, Égalité, Fraternité »"},
+{id:"x8",t:"textes",g:"symb",q:"Quel est l'<b>hymne national</b> français ?",a:"La Marseillaise.",d:"Elle a été écrite en 1792 par Rouget de Lisle, pendant la Révolution.",s:"La Marseillaise"},
+{id:"x9",t:"textes",g:"symb",q:"Quel symbole représente la République sous les traits d'une femme ?",a:"Marianne, l'allégorie de la République.",d:"On la trouve dans les mairies, sur les timbres et sur les pièces de monnaie.",s:"Marianne"},
+{id:"x10",t:"textes",g:"symb",q:"Quelle est la <b>fête nationale</b> française ?",a:"Le 14 juillet.",d:"Elle rappelle la prise de la Bastille (1789) et la fête de la Fédération (1790).",s:"Le 14 juillet"},
+{id:"x11",t:"textes",g:"symb",q:"Quel est le <b>drapeau</b> de la République française ?",a:"Le drapeau tricolore : bleu, blanc, rouge.",s:"Le drapeau tricolore (bleu, blanc, rouge)"},
+{id:"x12",t:"textes",g:"symb",q:"Quelle est la <b>devise</b> de l'Union européenne ?",a:"« Unie dans la diversité ».",d:"Les Européens sont unis tout en gardant leurs langues, cultures et traditions différentes.",s:"« Unie dans la diversité »"},
+{id:"x13",t:"textes",g:"symb",q:"Quel est l'<b>hymne</b> de l'Union européenne ?",a:"L'Ode à la joie.",d:"C'est un extrait de la 9e symphonie de Beethoven.",s:"L'Ode à la joie"},
+{id:"x14",t:"textes",g:"symb",q:"Quel est le <b>drapeau</b> de l'Union européenne ?",a:"Un drapeau bleu avec 12 étoiles dorées disposées en cercle.",d:"Le cercle représente l'union et la solidarité entre les peuples d'Europe.",p:"Le nombre 12 symbolise la perfection : il ne correspond pas au nombre d'États membres (27).",s:"Un drapeau bleu à 12 étoiles dorées"},
+{id:"x15",t:"textes",g:"symb",q:"Quelle est la <b>monnaie</b> de l'Union européenne ?",a:"L'euro (€).",d:"Elle est utilisée par 21 des 27 États membres : ils forment la zone euro.",p:"La Bulgarie est le dernier pays à l'avoir adoptée, le 1er janvier 2026.",s:"L'euro (€)"},
+{id:"x16",t:"textes",g:"symb",q:"Quelle date est la <b>journée de l'Europe</b> ?",a:"Le 9 mai.",d:"Elle rappelle la déclaration de Robert Schuman du 9 mai 1950, point de départ de la construction européenne.",s:"Le 9 mai"},
+
+/* ================= VALEURS ET PRINCIPES ================= */
+{id:"p1",t:"princ",g:null,q:"Quelles sont les <b>valeurs</b> de la démocratie ?",a:"Liberté, égalité, fraternité, dignité.",d:"Ce sont des idéaux que la société doit défendre."},
+{id:"p2",t:"princ",g:null,q:"Cite les <b>4 principes</b> de la République française.",a:"Elle est indivisible, laïque, démocratique et sociale.",d:"Ils sont écrits dans l'article 1er de la Constitution.",p:"Astuce pour retenir : « I-L-D-S » (Indivisible, Laïque, Démocratique, Sociale)."},
+{id:"p4",t:"princ",g:"prin",q:"Quel principe signifie : « l'État est neutre envers les religions » ?",a:"La République est laïque.",d:"Exemple : pas de signes religieux ostensibles à l'école publique.",s:"Laïque"},
+{id:"p5",t:"princ",g:"prin",q:"Quel principe signifie : « le pouvoir appartient au peuple » ?",a:"La République est démocratique.",d:"Exemple : l'élection du président de la République.",s:"Démocratique"},
+{id:"p6",t:"princ",g:"prin",q:"Quel principe signifie : « la République protège les plus faibles » ?",a:"La République est sociale.",d:"Exemple : l'école gratuite.",p:"Autre exemple : la Sécurité sociale, qui aide à payer les soins.",s:"Sociale"},
+{id:"p7",t:"princ",g:null,q:"Comment le peuple exerce-t-il la <b>souveraineté nationale</b> ?",a:"Par des représentants élus (démocratie représentative) et par le référendum.",d:"Les lois peuvent donc être adoptées par les représentants élus ou directement par les citoyens."},
+{id:"p8",t:"princ",g:null,q:"Quels textes garantissent nos <b>droits et libertés</b> ?",a:"La Déclaration des droits de l'homme et du citoyen (1789), la Constitution (1958) et la Charte de l'environnement (2004).",d:"Retiens les 3 dates : <b>1789</b>, <b>1958</b>, <b>2004</b>."},
+{id:"p9",t:"princ",g:null,q:"Cite des <b>droits et libertés</b> garantis en démocratie.",a:"Liberté d'expression, sûreté, santé, droit de vote, droit à un environnement sain (durable).",d:"Ils sont garantis par la Constitution, la DDHC et la Charte de l'environnement."},
+{id:"p10",t:"princ",g:null,q:"Que garantit une <b>République laïque</b> ?",a:"La liberté de conscience, la séparation des Églises et de l'État (1905), la neutralité de l'État et l'égalité de tous devant la loi.",d:"Chacun peut croire ou ne pas croire, sans que l'État favorise une religion."},
+{id:"p11",t:"princ",g:null,q:"Quels sont les <b>principes de la démocratie</b> ?",a:"La souveraineté du peuple, des élections pour choisir des représentants, la séparation des pouvoirs, des droits et libertés garantis, le pluralisme.",d:"Ce sont les « règles du jeu » démocratique."},
+
+/* ================= INSTITUTIONS FRANÇAISES ================= */
+{id:"i1",t:"inst",g:null,q:"De quoi est composé le <b>pouvoir exécutif</b> ?",a:"Du président de la République et du gouvernement (le Premier ministre et les ministres).",d:"Son rôle : faire appliquer les lois."},
+{id:"i2",t:"inst",g:null,q:"De quoi est composé le <b>pouvoir législatif</b> ?",a:"Du Parlement, formé de l'Assemblée nationale et du Sénat.",d:"Son rôle : discuter et voter les lois, contrôler le gouvernement."},
+{id:"i3",t:"inst",g:"elect",q:"Comment est élu le <b>président de la République</b> ?",a:"Au suffrage universel direct, pour 5 ans.",d:"Ce sont les citoyens eux-mêmes qui votent pour lui.",p:"L'élection au suffrage universel direct date de 1962 ; le mandat de 5 ans (quinquennat) date de 2000.",s:"Au suffrage universel direct"},
+{id:"i4",t:"inst",g:null,q:"Quels sont les <b>pouvoirs du président</b> de la République ?",a:"Chef de l'État et des armées, il promulgue les lois, nomme le Premier ministre, peut dissoudre l'Assemblée nationale et peut décider d'un référendum.",d:"C'est le personnage le plus puissant de la Ve République."},
+{id:"i5",t:"inst",g:"inst",q:"Qui peut <b>dissoudre</b> l'Assemblée nationale ?",a:"Le président de la République.",d:"La dissolution provoque de nouvelles élections des députés.",s:"Le président de la République"},
+{id:"i6",t:"inst",g:"elect",q:"Comment est désigné le <b>Premier ministre</b> ?",a:"Il est nommé par le président de la République.",d:"Il dirige le gouvernement, composé des ministres.",s:"Nommé par le président de la République"},
+{id:"i8",t:"inst",g:null,q:"Présente l'<b>Assemblée nationale</b>.",a:"577 députés élus au suffrage universel direct pour 5 ans. Elle débat et vote les lois et contrôle l'action du gouvernement.",p:"Elle peut renverser le gouvernement en votant une motion de censure."},
+{id:"i13",t:"inst",g:"inst",q:"Qui <b>vote les lois</b> en France ?",a:"Le Parlement : l'Assemblée nationale et le Sénat.",d:"Les deux assemblées débattent et votent les lois.",s:"Le Parlement (Assemblée nationale et Sénat)"},
+{id:"i14",t:"inst",g:"inst",q:"Qui vérifie que les lois sont <b>conformes à la Constitution</b> ?",a:"Le Conseil constitutionnel, gardien de la Constitution.",d:"Il contrôle aussi le bon déroulement des élections (présidentielle, législatives, référendum).",s:"Le Conseil constitutionnel"},
+{id:"i16",t:"inst",g:"inst",q:"Qui <b>promulgue</b> les lois (les signe pour qu'elles s'appliquent) ?",a:"Le président de la République.",s:"Le président de la République"},
+{id:"i17",t:"inst",g:"inst",q:"Qui peut décider d'un <b>référendum</b> ?",a:"Le président de la République.",d:"Il le fait sur proposition du gouvernement ou du Parlement.",s:"Le président de la République"},
+{id:"i18",t:"inst",g:null,q:"Qui <b>contrôle l'action du gouvernement</b> ?",a:"Le Parlement, en particulier l'Assemblée nationale.",d:"Par exemple, les députés posent des questions au gouvernement chaque semaine."},
+{id:"i19",t:"inst",g:null,q:"Donne des exemples de <b>révisions de la Constitution</b>.",a:"Élection du président au suffrage universel direct, mandat de 5 ans, parité femmes-hommes, décentralisation, commissions d'enquête parlementaires, pouvoirs renforcés du Conseil constitutionnel.",d:"Ces révisions ont apporté <b>plus de démocratie</b>.",p:"Repères : suffrage universel direct (1962), parité (1999), quinquennat (2000), décentralisation (2003)."},
+
+/* ================= LA DÉMOCRATIE ET L'EUROPE ================= */
+{id:"e1",t:"ue",g:"ue",q:"Quelle institution <b>fixe les politiques générales</b> de l'UE ?",a:"Le Conseil européen.",d:"Il réunit les chefs d'État ou de gouvernement des 27 États membres.",s:"Le Conseil européen"},
+{id:"e2",t:"ue",g:"ue",q:"Quelle institution <b>propose les lois</b> de l'UE ?",a:"La Commission européenne.",d:"Elle compte un commissaire par État membre.",s:"La Commission européenne"},
+{id:"e3",t:"ue",g:"ue",q:"Quelle institution européenne est <b>élue directement</b> par les citoyens ?",a:"Le Parlement européen.",d:"Il est élu au suffrage universel direct tous les 5 ans. Il vote le budget et les lois (directives) avec le Conseil de l'UE.",s:"Le Parlement européen"},
+{id:"e4",t:"ue",g:"ue",q:"Quelle institution réunit les <b>ministres</b> des États et vote les lois avec le Parlement européen ?",a:"Le Conseil de l'UE.",d:"Les ministres qui se réunissent changent selon le sujet (agriculture, économie…).",s:"Le Conseil de l'UE"},
+{id:"e5",t:"ue",g:"ue",q:"Quelle institution <b>fait appliquer</b> la politique et le droit de l'UE ?",a:"La Cour de justice de l'UE.",d:"Elle vérifie que les États respectent les règles européennes.",s:"La Cour de justice de l'UE"},
+{id:"e6",t:"ue",g:"ue",q:"Quelle institution <b>gère la monnaie unique</b> (l'euro) ?",a:"La Banque centrale européenne (BCE).",p:"Son siège est à Francfort, en Allemagne.",s:"La Banque centrale européenne"},
+{id:"e7",t:"ue",g:null,q:"Qui <b>vote le budget et les lois</b> (directives) de l'UE ?",a:"Le Parlement européen et le Conseil de l'UE, ensemble.",d:"Attention au piège : ce sont <b>deux</b> institutions qui votent."},
+{id:"e8",t:"ue",g:null,q:"Qui est <b>citoyen européen</b> ?",a:"Tout citoyen d'un État membre de l'UE, donc tous les Français.",d:"La citoyenneté européenne s'ajoute à la nationalité, elle ne la remplace pas."},
+{id:"e9",t:"ue",g:null,q:"Quels sont les <b>droits des citoyens européens</b> ?",a:"Circuler et s'installer librement dans l'UE, voter et être candidat aux élections européennes et municipales du pays où l'on réside, être protégé à l'étranger par l'ambassade d'un autre pays de l'UE, adresser une pétition au Parlement européen.",d:"Exemple : un Espagnol qui habite à Grenoble peut voter aux municipales de Grenoble."},
+{id:"e10",t:"ue",g:null,q:"Quelles sont les conditions pour <b>voter</b> comme citoyen français ? et comme citoyen européen ?",a:"Citoyen français : avoir 18 ans et la nationalité française. Citoyen européen : avoir 18 ans et la nationalité d'un État membre de l'UE.",d:"Un Français remplit donc les deux conditions."},
+{id:"e11",t:"ue",g:null,q:"Quelles sont les <b>valeurs communes</b> de l'UE ?",a:"Liberté, égalité, solidarité, dignité, refus des discriminations.",d:"Ce sont des valeurs proches de celles de la République française."},
+{id:"e12",t:"ue",g:"nb",q:"Combien d'<b>États membres</b> compte l'Union européenne ?",a:"27 États membres.",p:"Le Royaume-Uni a quitté l'UE en 2020 (Brexit).",s:"27"},
+
+/* ================= COMPARER ET EXPLIQUER ================= */
+{id:"a1",t:"approf",g:null,q:"Pourquoi faut-il <b>séparer les pouvoirs</b> ?",a:"Pour éviter qu'une seule personne ait tous les pouvoirs et en abuse : c'est une garantie pour nos libertés.",d:"Chaque pouvoir limite et contrôle les autres."},
+{id:"a2",t:"approf",g:null,q:"Comment les institutions <b>se contrôlent-elles</b> les unes les autres ?",a:"Le président peut dissoudre l'Assemblée nationale ; l'Assemblée contrôle le gouvernement et peut le renverser ; le Conseil constitutionnel vérifie que les lois respectent la Constitution.",d:"C'est un équilibre des pouvoirs."},
+{id:"a3",t:"approf",g:null,q:"Comment une <b>loi</b> est-elle adoptée en France ?",a:"Elle est proposée par le gouvernement ou par des parlementaires, puis débattue et votée par l'Assemblée nationale et le Sénat, puis promulguée par le président.",d:"Le Conseil constitutionnel peut vérifier qu'elle respecte la Constitution avant sa promulgation."},
+{id:"a6",t:"approf",g:null,q:"En quoi la <b>laïcité</b> protège-t-elle la liberté de chacun ?",a:"L'État ne favorise aucune religion : chacun peut croire, ne pas croire ou changer de religion, et tous sont égaux devant la loi.",d:"La laïcité n'est pas contre les religions : elle protège toutes les convictions."},
+
+];
+
+/* Exercice « Qui fait quoi ? » : c = indice de la bonne catégorie, e = explication */
+const TRI = {
+  fue:{label:"France ou Union européenne ?", short:"France / UE", cats:["France","Union européenne"], items:[
+    {x:"Marianne",c:0,e:"Allégorie de la République française."},
+    {x:"La Marseillaise",c:0,e:"Hymne national français."},
+    {x:"L'Ode à la joie",c:1,e:"Hymne européen (Beethoven)."},
+    {x:"« Unie dans la diversité »",c:1,e:"Devise de l'UE."},
+    {x:"« Liberté, Égalité, Fraternité »",c:0,e:"Devise de la République."},
+    {x:"Le 14 juillet",c:0,e:"Fête nationale française."},
+    {x:"Le 9 mai",c:1,e:"Journée de l'Europe."},
+    {x:"Le drapeau bleu à 12 étoiles",c:1,e:"Drapeau européen."},
+    {x:"Le drapeau tricolore",c:0,e:"Drapeau français."},
+    {x:"L'euro",c:1,e:"Monnaie unique de l'UE."},
+    {x:"L'Assemblée nationale",c:0,e:"Institution française : 577 députés."},
+    {x:"La Commission européenne",c:1,e:"Elle propose les lois de l'UE."},
+    {x:"Le Conseil constitutionnel",c:0,e:"Gardien de la Constitution française."},
+    {x:"La Banque centrale européenne",c:1,e:"Elle gère l'euro."},
+    {x:"Le Sénat",c:0,e:"Institution française : 348 sénateurs."},
+    {x:"Le Parlement européen",c:1,e:"Élu par les citoyens européens."}
+  ]},
+  pouv:{label:"Quel pouvoir ou quelle institution ?", short:"Pouvoirs", cats:["Exécutif","Législatif","Conseil constitutionnel"], items:[
+    {x:"Le président de la République",c:0},
+    {x:"Le Premier ministre",c:0},
+    {x:"Les ministres",c:0},
+    {x:"L'Assemblée nationale",c:1},
+    {x:"Le Sénat",c:1},
+    {x:"Voter les lois",c:1},
+    {x:"Débattre des lois",c:1},
+    {x:"Faire appliquer les lois",c:0},
+    {x:"Vérifier que les lois respectent la Constitution",c:2},
+    {x:"Contrôler le bon déroulement des élections",c:2},
+    {x:"Contrôler l'action du gouvernement",c:1,e:"C'est le rôle du Parlement, surtout de l'Assemblée nationale."},
+    {x:"Dissoudre l'Assemblée nationale",c:0,e:"C'est un pouvoir du président de la République."},
+    {x:"Promulguer les lois",c:0,e:"C'est le président qui les promulgue."}
+  ]},
+  val:{label:"Valeur ou principe de la République ?", short:"Valeurs / principes", cats:["Valeur","Principe"], items:[
+    {x:"Liberté",c:0},{x:"Égalité",c:0},{x:"Fraternité",c:0},{x:"Dignité",c:0},
+    {x:"Indivisible",c:1,e:"Une seule loi pour tous."},
+    {x:"Laïque",c:1,e:"Neutralité de l'État envers les religions."},
+    {x:"Démocratique",c:1,e:"Le pouvoir appartient au peuple."},
+    {x:"Sociale",c:1,e:"Protection des plus faibles."}
+  ]}
+};
+
+const BADGES = [
+  {id:"first",   name:"Premières fiches",        desc:"Réviser 10 cartes.",                                   icon:"card"},
+  {id:"streak8", name:"En série",                desc:"8 bonnes réponses d'affilée.",                         icon:"bolt"},
+  {id:"comeback",name:"Persévérant",             desc:"Réussir 8 cartes que tu avais ratées.",                icon:"loop"},
+  {id:"m_mots",  name:"Dictionnaire civique",    desc:"Maîtriser 80 % des mots à savoir expliquer.",          icon:"book"},
+  {id:"m_inst",  name:"Gardien de la Constitution", desc:"Maîtriser 80 % des cartes sur les institutions.",   icon:"columns"},
+  {id:"m_ue",    name:"Citoyen européen",        desc:"Maîtriser 80 % des cartes sur l'Europe.",              icon:"star"},
+  {id:"qcm10",   name:"Sans faute",              desc:"Faire 10/10 au défi QCM.",                             icon:"target"},
+  {id:"tri",     name:"Qui fait quoi ? Expert",  desc:"Réussir une série « Qui fait quoi ? » sans erreur.",   icon:"sort"},
+  {id:"days3",   name:"Régulier",                desc:"Réviser 3 jours différents.",                          icon:"cal"},
+  {id:"ready",   name:"Prêt pour l'évaluation",  desc:"Atteindre 70 % de maîtrise globale.",                  icon:"check"},
+  {id:"master",  name:"Gardien de la République",desc:"Maîtriser 100 % des cartes.",                          icon:"crown"}
+];
+const THEME_BADGES = {mots:"m_mots", inst:"m_inst", ue:"m_ue"};
+
+const LEVELS = [
+  [0,"Je découvre le chapitre"],[.15,"Apprenti citoyen"],[.45,"Presque prêt"],
+  [.70,"Prêt pour l'évaluation"],[.90,"Expert du chapitre"],[.999,"Gardien de la République"]
+];
+
+(function(){
+"use strict";
+const KEY = "emc1-regles-jeu-democratique-3e-v1";
+
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const byId = Object.fromEntries(CARDS.map(c => [c.id, c]));
+const NTH = Object.keys(THEMES).length;
+
+/* ---------- Sauvegarde ---------- */
+function fresh(){ return {xp:0, cards:{}, badges:{}, days:[], reviewed:0, bestStreak:0, comeback:0, triPerfect:0, sel:Object.keys(THEMES), size:20, triKind:"mix"}; }
+let S = fresh();
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(fresh(), JSON.parse(raw)); } catch(e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+
+/* ---------- Outils ---------- */
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const box = id => (S.cards[id] || {}).b || 0;
+const cardScore = id => { const b = box(id); return b <= 1 ? 0 : b === 2 ? .4 : b === 3 ? .7 : 1; };
+const mastery = list => list.length ? list.reduce((s, c) => s + cardScore(c.id), 0) / list.length : 0;
+const inTheme = t => CARDS.filter(c => c.t === t);
+const pct = x => Math.round(x * 100);
+const dkey = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const today = () => dkey(new Date());
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const strip = s => String(s).replace(/<[^>]+>/g, "");
+
+function level(){
+  const xp = mastery(CARDS);
+  let i = 0; for (let k = 0; k < LEVELS.length; k++) if (xp >= LEVELS[k][0]) i = k;
+  if (i > (S.lvl || 0)) { S.lvl = i; save(); }
+  i = Math.max(i, S.lvl || 0);
+  const cur = LEVELS[i][0], next = LEVELS[i + 1] ? LEVELS[i + 1][0] : null;
+  return {n:i + 1, name:LEVELS[i][1], cur, next, p: next ? Math.max(0, Math.min(1, (xp - cur) / (next - cur))) : 1};
+}
+function dayStreak(){
+  const set = new Set(S.days); let n = 0; const d = new Date();
+  if (!set.has(today())) d.setDate(d.getDate() - 1);
+  while (set.has(dkey(d))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function markDay(){ const t = today(); if (!S.days.includes(t)) S.days.push(t); }
+const failedIds = () => CARDS.filter(c => { const r = S.cards[c.id]; return r && r.b === 1; }).map(c => c.id);
+
+/* ---------- Icônes ---------- */
+const P = {
+  card:'<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/>',
+  bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',
+  loop:'<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/>',
+  columns:'<path d="M3 9 12 4l9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>',
+  star:'<path d="m12 3 2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/>',
+  sort:'<path d="M4 6h9M4 12h6M4 18h3"/><path d="M17 4v16M14 17l3 3 3-3"/>',
+  cal:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  crown:'<path d="m3 8 4 4 5-7 5 7 4-4-2 11H5z"/>',
+  flip:'<path d="M4 7h11a5 5 0 0 1 0 10H9"/><path d="m8 3-4 4 4 4"/>',
+  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+  medal:'<circle cx="12" cy="14" r="6"/><path d="M8 3h8l-2 5h-4z"/>',
+  pin:'<path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/>',
+  user:'<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.6 3.8-5.5 7-5.5s6 1.9 7 5.5"/>'
+};
+const ico = (n, sz) => `<svg viewBox="0 0 24 24" width="${sz||20}" height="${sz||20}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]||""}</svg>`;
+const medal = (b, locked) => `<div class="medal${locked ? " locked" : ""}"><div class="disc">${ico(b.icon, 30)}</div></div>`;
+
+/* ---------- Badges ---------- */
+function checkBadges(ctx){
+  ctx = ctx || {};
+  const got = [];
+  const give = id => { if (!S.badges[id]) { S.badges[id] = today(); got.push(BADGES.find(b => b.id === id)); } };
+  if (S.reviewed >= 10) give("first");
+  if (S.bestStreak >= 8) give("streak8");
+  if (S.comeback >= 8) give("comeback");
+  for (const t in THEME_BADGES) if (mastery(inTheme(t)) >= .8) give(THEME_BADGES[t]);
+  if (ctx.qcmPerfect) give("qcm10");
+  if (S.triPerfect >= 1) give("tri");
+  if (S.days.length >= 3) give("days3");
+  const g = mastery(CARDS);
+  if (g >= .7) give("ready");
+  if (g >= .999) give("master");
+  if (got.length) { save(); got.forEach((b, i) => setTimeout(() => toast(b), i * 2600)); }
+}
+let toastEl;
+function toast(b){
+  if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "toast"; toastEl.setAttribute("role", "status"); document.body.appendChild(toastEl); }
+  toastEl.innerHTML = medal(b) + `<div><small>Badge débloqué</small><b>${esc(b.name)}</b></div>`;
+  requestAnimationFrame(() => toastEl.classList.add("show"));
+  confetti();
+  clearTimeout(toastEl._t); toastEl._t = setTimeout(() => toastEl.classList.remove("show"), 2300);
+}
+function confetti(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let c = $("#confetti"); if (!c) { c = document.createElement("canvas"); c.id = "confetti"; document.body.appendChild(c); }
+  const ctx = c.getContext("2d"), W = c.width = innerWidth, H = c.height = innerHeight;
+  const cs = getComputedStyle(document.documentElement);
+  const cols = ["--gold","--accent","--c-princ","--c-inst","--c-mots","--c-ue"].map(v => cs.getPropertyValue(v).trim() || "#c90");
+  const ps = Array.from({length:90}, () => ({x:W/2 + (Math.random()-.5)*80, y:H*.75, vx:(Math.random()-.5)*12, vy:-Math.random()*14-6, r:Math.random()*6+3, c:cols[Math.floor(Math.random()*cols.length)], a:Math.random()*6, s:(Math.random()-.5)*.3}));
+  let f = 0;
+  (function tick(){
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .42; p.vx *= .99; p.a += p.s; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); ctx.restore(); });
+    if (++f < 110) requestAnimationFrame(tick); else ctx.clearRect(0,0,W,H);
+  })();
+}
+function xpFloat(n){
+  if (n <= 0) return;
+  const el = document.createElement("div"); el.className = "xpfloat"; el.textContent = "+" + n + " XP";
+  document.body.appendChild(el); setTimeout(() => el.remove(), 950);
+}
+function addXP(n){ S.xp += n; xpFloat(n); }
+
+/* Statistiques anonymes (GoatCounter) : uniquement le nombre de sessions terminées */
+function track(name){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: "emc1-" + name, title: name, event: true}); } catch(e) {} }
+
+/* Statistiques anonymes (Google Sheets) : appli et mode de jeu uniquement */
+const APP_NAME = "EMC1 Règles du jeu démocratique 3e";
+const STATS_URL = window.EMC1_STATS_URL || "";
+function deviceType(){
+  try {
+    const touch = matchMedia("(pointer: coarse)").matches;
+    if (!touch) return "ordinateur";
+    return Math.min(screen.width, screen.height) < 600 ? "téléphone" : "tablette";
+  } catch(e) { return ""; }
+}
+function reportVisit(){
+  try {
+    if (!STATS_URL || navigator.webdriver) return;
+    const send = () => {
+      ["pointerdown", "keydown", "touchstart"].forEach(ev => removeEventListener(ev, send, true));
+      try { if (sessionStorage.getItem("emc1-visite")) return; sessionStorage.setItem("emc1-visite", "1"); } catch(e) {}
+      fetch(STATS_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain;charset=utf-8"},
+        body: JSON.stringify({type: "visite", app: APP_NAME, appareil: deviceType()})}).catch(() => {});
+    };
+    ["pointerdown", "keydown", "touchstart"].forEach(ev => addEventListener(ev, send, {capture: true, passive: true}));
+  } catch(e) {}
+}
+function report(mode, n){
+  try {
+    if (!STATS_URL || navigator.webdriver || !n) return;
+    fetch(STATS_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify({app: APP_NAME, mode})}).catch(() => {});
+  } catch(e) {}
+}
+
+/* ---------- Mise à jour d'une carte ---------- */
+function grade(id, r){ // r : 0 raté, 1 presque, 2 su
+  const rec = S.cards[id] || (S.cards[id] = {b:0, ok:0, ko:0});
+  const before = rec.b;
+  if (r === 2) {
+    if (rec.f) { S.comeback++; rec.f = false; }
+    rec.b = Math.min(5, Math.max(before, 1) + 1); rec.ok++;
+  } else if (r === 1) {
+    rec.b = before >= 3 ? before - 1 : Math.max(1, before);
+  } else {
+    rec.b = 1; rec.ko++; rec.f = true;
+  }
+  rec.last = Date.now();
+  S.reviewed++; markDay();
+}
+
+/* ---------- Sélection des cartes ---------- */
+function pool(){ return CARDS.filter(c => S.sel.includes(c.t)); }
+function pick(list, n){
+  const now = Date.now();
+  return list.map(c => {
+    const r = S.cards[c.id]; const b = r ? r.b : 0;
+    let pr = b === 0 ? 1.3 : b === 1 ? 0 : b; // les cartes ratées passent en premier, puis les nouvelles
+    if (r && r.last && now - r.last < 8 * 60 * 1000) pr += 1.5;
+    return {c, pr: pr + Math.random() * 1.2};
+  }).sort((a, b) => a.pr - b.pr).slice(0, n).map(x => x.c);
+}
+
+/* =========================================================
+   ACCUEIL
+   ========================================================= */
+let confirmReset = false, view = "home";
+function home(){
+  view = "home"; stopTimer();
+  const lv = level(), g = mastery(CARDS);
+  const acquired = CARDS.filter(c => box(c.id) >= 3).length;
+  const fails = failedIds().length;
+  const nb = Object.keys(S.badges).length;
+  const sizes = [10, 20, 40, "Tout"];
+  const p = pool(), qp = qcmPool().length;
+  const ds = dayStreak();
+  const triOpts = [["mix","Mélange"]].concat(Object.entries(TRI).map(([k, v]) => [k, v.short]));
+  app.innerHTML = `
+  <header class="top">
+    <div class="brand"><div class="tab-h2" aria-hidden="true">EMC<small>CH. 1</small></div>
+      <div class="brand-txt"><b>Les règles du jeu démocratique</b><span>3e · EMC · Révisions</span>
+        <div class="chips"><span class="chip">${ico("pin",13)} Collège Plan Menu · Coublevie · 3e</span><span class="chip">${ico("user",13)} Jeanne Cador · Enseignante</span></div></div></div>
+    <div class="navbtns"><button class="ghost" id="toBadges">${ico("medal",16)} Badges et bilan</button></div>
+  </header>
+
+  <section class="dash fade-in" aria-label="Ta progression">
+    <div class="player">
+      <div class="lvl" title="Niveau ${lv.n} sur ${LEVELS.length}">${lv.n}<small>NIV.</small></div>
+      <div class="pinfo">
+        <div class="pname"><h2>${esc(lv.name)}</h2></div>
+        <div class="xpbar"><i style="width:${pct(lv.p)}%"></i></div>
+        <div class="xptxt"><span>${S.xp} XP</span><span>${lv.next ? "niveau suivant : " + pct(lv.next) + " %" : "niveau maximum"}</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat ready"><b>${pct(g)} %</b><span>prêt pour l'évaluation</span></div>
+      <div class="stat"><b>${acquired}<small class="muted" style="font-size:16px">/${CARDS.length}</small></b><span>cartes acquises</span></div>
+      <div class="stat fire"><b>${ds}</b><span>jour${ds > 1 ? "s" : ""} de révision d'affilée</span></div>
+      <div class="stat"><b>${nb}<small class="muted" style="font-size:16px">/${BADGES.length}</small></b><span>badges gagnés</span></div>
+    </div>
+  </section>
+
+  ${fails ? `<div class="review-banner"><p><b>${fails} carte${fails > 1 ? "s" : ""} à retravailler.</b> Ce sont celles que tu as ratées : elles reviennent en priorité.</p><button class="go" id="goFails">${ico("loop",18)} Revoir mes erreurs</button></div>` : ""}
+
+  <section class="how" aria-label="Comment ça marche">
+    <h3>Comment ça marche ?</h3>
+    <ol>
+      <li><span><b>Choisis</b> tes thèmes et un mode de jeu.</span></li>
+      <li><span><b>Lis la question</b>, cherche la réponse dans ta tête, puis retourne la carte.</span></li>
+      <li><span><b>Sois honnête</b> : « Je savais », « Presque » ou « Raté ».</span></li>
+      <li><span><b>Les cartes ratées reviennent</b> plus souvent, jusqu'à ce que tu les saches.</span></li>
+    </ol>
+    <p>Chaque bonne réponse rapporte des points (XP). Enchaîne les bonnes réponses pour gagner plus et débloquer des badges.</p>
+  </section>
+
+  <div class="sec-title"><h3>Choisis tes thèmes</h3><button class="linkbtn" id="allThemes">${S.sel.length === NTH ? "Tout désélectionner" : "Tout sélectionner"}</button></div>
+  <div class="themes">
+    ${Object.entries(THEMES).map(([k, t]) => { const l = inTheme(k), m = mastery(l); return `
+      <button class="theme" style="--c:${t.color}" aria-pressed="${S.sel.includes(k)}" data-t="${k}">
+        <div class="th-top"><span class="th-name"><span class="dot"></span>${esc(t.label)}</span><span class="chk"></span></div>
+        <div class="mbar"><i style="width:${pct(m)}%"></i></div>
+        <div class="th-meta"><span>${l.length} cartes</span><span>${pct(m)} % maîtrisé</span></div>
+      </button>`; }).join("")}
+  </div>
+
+  <div class="sec-title"><h3>Choisis ton mode</h3><span class="muted" style="font-size:14px">${p.length} cartes sélectionnées</span></div>
+  <div class="modes">
+    <div class="mode">
+      <h4>${ico("flip",22)} Flip cards</h4>
+      <p>Lis la question, cherche la réponse dans ta tête, retourne la carte et note-toi honnêtement. Les cartes ratées reviennent plus souvent.</p>
+      <div class="seg" role="group" aria-label="Nombre de cartes">${sizes.map(s => `<button data-size="${s}" aria-pressed="${String(S.size) === String(s)}">${s}</button>`).join("")}</div>
+      <button class="go" id="goFlip" ${p.length ? "" : "disabled"}>Commencer ${ico("arrow",18)}</button>
+    </div>
+    <div class="mode">
+      <h4>${ico("quiz",22)} Défi QCM</h4>
+      <p>10 questions à choix multiples, corrigées tout de suite. Réponds vite pour gagner un bonus. Visé : 10/10.</p>
+      <button class="go alt" id="goQcm" ${qp >= 4 ? "" : "disabled"}>Lancer le défi ${ico("arrow",18)}</button>
+      ${qp >= 4 ? "" : `<p style="font-size:12.5px">Sélectionne au moins un des cinq premiers thèmes.</p>`}
+    </div>
+    <div class="mode">
+      <h4>${ico("sort",22)} Qui fait quoi ?</h4>
+      <p>Range chaque élément dans la bonne case : France ou Europe, exécutif ou législatif, valeur ou principe.</p>
+      <div class="seg wrapseg" role="group" aria-label="Série">${triOpts.map(([k, l]) => `<button data-tri="${k}" aria-pressed="${S.triKind === k}">${esc(l)}</button>`).join("")}</div>
+      <button class="go alt" id="goTri">Trier ${ico("arrow",18)}</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><h3>Tes badges</h3><button class="linkbtn" id="toBadges2">Voir tous les badges</button></div>
+  <div class="badge-strip">
+    ${BADGES.slice().sort((a, b) => (S.badges[b.id] ? 1 : 0) - (S.badges[a.id] ? 1 : 0)).slice(0, 8).map(b => `<div class="medal${S.badges[b.id] ? "" : " locked"}" title="${esc(b.desc)}"><div class="disc">${ico(b.icon,30)}</div><span>${esc(b.name)}</span></div>`).join("")}
+  </div>
+  <p class="foot">Ta progression est enregistrée dans ce navigateur, sur cet appareil.</p>`;
+
+  app.querySelectorAll(".theme").forEach(b => b.onclick = () => {
+    const t = b.dataset.t; S.sel = S.sel.includes(t) ? S.sel.filter(x => x !== t) : S.sel.concat(t); save(); home();
+  });
+  $("#allThemes").onclick = () => { S.sel = S.sel.length === NTH ? [] : Object.keys(THEMES); save(); home(); };
+  app.querySelectorAll("[data-size]").forEach(b => b.onclick = () => { S.size = b.dataset.size === "Tout" ? "Tout" : +b.dataset.size; save(); home(); });
+  app.querySelectorAll("[data-tri]").forEach(b => b.onclick = () => { S.triKind = b.dataset.tri; save(); home(); });
+  $("#goFlip").onclick = () => { const n = S.size === "Tout" ? p.length : S.size; startFlip(pick(p, n).map(c => c.id)); };
+  $("#goQcm").onclick = startQcm;
+  $("#goTri").onclick = () => startTri(S.triKind);
+  $("#toBadges").onclick = $("#toBadges2").onclick = badgesView;
+  const gf = $("#goFails"); if (gf) gf.onclick = () => startFlip(shuffle(failedIds()));
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   FLIP CARDS
+   ========================================================= */
+let F = null;
+function startFlip(ids){
+  if (!ids.length) return;
+  F = {queue: ids.slice(), total: ids.length, done: 0, i: 0, flipped: false, combo: 0, xp0: S.xp, res: {}, requeue: {}};
+  view = "flip"; renderFlip();
+}
+function boxDots(id){
+  const b = box(id); let h = "";
+  for (let i = 1; i <= 5; i++) h += `<i class="${i <= b ? "on" : ""}"></i>`;
+  return `<span class="fbox" title="Niveau de la carte : ${b}/5">${h}</span>`;
+}
+function renderFlip(){
+  if (F.i >= F.queue.length) return endFlip();
+  const c = byId[F.queue[F.i]], th = THEMES[c.t];
+  F.flipped = false;
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(F.done / F.total)}%"></i></div>
+    <span class="sess-count">${F.done}/${F.total}</span>
+    <span class="combo" id="combo">${F.combo >= 2 ? "×" + F.combo : ""}</span>
+  </div>
+  <div class="stage fade-in">
+    <div class="flip" id="flip" tabindex="0" role="button" aria-label="Retourner la carte">
+      <div class="face front" style="--c:${th.color}">
+        <div class="fhead"><span class="ftag">${esc(th.short)}</span>${boxDots(c.id)}</div>
+        <div class="ruled"><div class="q">${c.q}</div><div class="hint">Touche la carte pour voir le corrigé</div></div>
+      </div>
+      <div class="face back" style="--c:${th.color}">
+        <div class="fhead"><span class="ftag">Corrigé · ${esc(th.short)}</span>${boxDots(c.id)}</div>
+        <div class="ruled">
+          <p class="qback">${strip(c.q)}</p>
+          <div class="ans-label">Réponse</div>
+          <div class="ans">${c.a}</div>
+          ${c.d ? `<div class="det">${c.d}</div>` : ""}
+          ${c.p ? `<div class="plus"><b class="lab">Pour aller plus loin</b>${c.p}</div>` : ""}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="actions"><button class="go reveal" id="reveal">Voir la réponse</button></div>
+  <p class="keys">Espace : retourner · 1 : raté · 2 : presque · 3 : je savais</p>`;
+  $("#quit").onclick = () => { save(); home(); };
+  $("#flip").onclick = doFlip;
+  $("#reveal").onclick = doFlip;
+}
+function doFlip(){
+  if (view !== "flip") return;
+  F.flipped = !F.flipped;
+  $("#flip").classList.toggle("flipped", F.flipped);
+  if (F.flipped && !$("#rate")) {
+    $("#actions").innerHTML = `<div class="rate" id="rate">
+      <button class="r0" data-r="0">Raté<small>reviendra vite</small></button>
+      <button class="r1" data-r="1">Presque<small>reviendra</small></button>
+      <button class="r2" data-r="2">Je savais<small>+10 XP</small></button></div>`;
+    app.querySelectorAll("[data-r]").forEach(b => b.onclick = e => { e.stopPropagation(); rateFlip(+b.dataset.r); });
+  }
+}
+function rateFlip(r){
+  const id = F.queue[F.i];
+  grade(id, r);
+  if (!(id in F.res)) F.res[id] = r;
+  let gain;
+  if (r === 2) { F.combo++; S.bestStreak = Math.max(S.bestStreak, F.combo); gain = 10 + Math.min(F.combo - 1, 5) * 2; }
+  else { F.combo = 0; gain = r === 1 ? 4 : 1; }
+  addXP(gain);
+  const n = F.requeue[id] || 0;
+  if (r === 0 && n < 3) { F.queue.splice(Math.min(F.queue.length, F.i + 4), 0, id); F.requeue[id] = n + 1; }
+  else if (r === 1 && n < 1) { F.queue.splice(Math.min(F.queue.length, F.i + 7), 0, id); F.requeue[id] = n + 1; }
+  if (!F.queue.slice(F.i + 1).includes(id)) F.done++;
+  F.i++;
+  save(); checkBadges();
+  renderFlip();
+  if (F.combo >= 2) { const el = $("#combo"); if (el) el.classList.add("pop"); }
+}
+function endFlip(){
+  view = "end"; track("session-flipcards");
+  const ids = Object.keys(F.res);
+  report("Flip cards", ids.length);
+  const k = ids.filter(i => F.res[i] === 0), m = ids.filter(i => F.res[i] === 1), o = ids.filter(i => F.res[i] === 2);
+  const toReview = k.concat(m);
+  const msg = o.length === ids.length ? "Parfait !" : o.length / ids.length >= .7 ? "Très bien !" : o.length / ids.length >= .4 ? "Bon travail" : "Continue !";
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Session terminée</span><h2>${msg}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${o.length}</b><span>du premier coup</span></div>
+      <div class="stat"><b class="m">${m.length}</b><span>presque</span></div>
+      <div class="stat"><b class="k">${k.length}</b><span>ratées au départ</span></div>
+      <div class="stat"><b class="x">+${S.xp - F.xp0}</b><span>XP gagnés</span></div>
+    </div>
+    ${toReview.length ? `<div><h3 style="font-family:var(--f-display);text-transform:uppercase;font-size:20px;margin-bottom:8px">À retenir</h3>
+      <div class="miss">${toReview.map(i => { const c = byId[i], th = THEMES[c.t]; return `<details style="--c:${th.color}"><summary><span class="ftag">${esc(th.short)}</span>${strip(c.q)}</summary><p><b>${c.a}</b></p>${c.d ? `<div style="margin-top:8px">${c.d}</div>` : ""}</details>`; }).join("")}</div></div>` : ""}
+    <div class="row">
+      ${toReview.length ? `<button class="go" id="again">${ico("loop",18)} Rejouer ces ${toReview.length} cartes</button>` : ""}
+      <button class="go alt" id="more">Nouvelle session</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  if (toReview.length) $("#again").onclick = () => startFlip(shuffle(toReview));
+  $("#more").onclick = () => { const p = pool(); startFlip(pick(p, S.size === "Tout" ? p.length : S.size).map(c => c.id)); };
+  $("#back").onclick = home;
+  if (o.length === ids.length && ids.length >= 5) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   QCM
+   ========================================================= */
+let Q = null, timerRAF = 0;
+/* Mauvaises réponses supplémentaires, pour les groupes qui ont moins de 4 réponses différentes */
+const EXTRA = {
+  inst: ["Le gouvernement (Premier ministre et ministres)"],
+  prin: ["Indivisible"],
+  elect: ["Au suffrage universel indirect", "Tiré au sort parmi les citoyens"]
+};
+const groupAnswers = g => new Set(CARDS.filter(x => x.g === g && x.s).map(x => x.s).concat(EXTRA[g] || []));
+function qcmPool(){ return pool().filter(c => c.g && c.s && groupAnswers(c.g).size >= 4); }
+function stopTimer(){ cancelAnimationFrame(timerRAF); }
+function startQcm(){
+  const list = pick(qcmPool(), 10);
+  if (!list.length) return;
+  Q = {list, i: 0, score: 0, xp0: S.xp, wrong: []};
+  view = "qcm"; renderQcm();
+}
+function optionsFor(c){
+  const same = CARDS.filter(x => x.g === c.g && x.s && x.s !== c.s && x.id !== c.id);
+  const uniq = []; shuffle(same).forEach(x => { if (!uniq.some(u => u.s === x.s)) uniq.push(x); });
+  (EXTRA[c.g] || []).forEach((s, i) => { if (s !== c.s && !uniq.some(u => u.s === s)) uniq.push({id: "extra-" + i, s}); });
+  return shuffle([c].concat(shuffle(uniq).slice(0, 3)));
+}
+function qcmQuestion(c){
+  if (c.g === "def") return "Quelle est la bonne définition de " + c.q.replace(/^Définis\s*:\s*/, "") + " ?";
+  return c.q;
+}
+function renderQcm(){
+  if (Q.i >= Q.list.length) return endQcm();
+  const c = Q.list[Q.i], th = THEMES[c.t], opts = optionsFor(c);
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(Q.i / Q.list.length)}%"></i></div>
+    <span class="sess-count">${Q.i + 1}/${Q.list.length}</span>
+    <span class="combo">${Q.score} pt${Q.score > 1 ? "s" : ""}</span>
+  </div>
+  <div class="face fade-in" style="--c:${th.color};min-height:0">
+    <div class="fhead"><span class="ftag">Défi · ${esc(th.short)}</span><span class="fbox">bonus vitesse</span></div>
+    <div class="timer"><i id="tbar"></i></div>
+    <div class="ruled" style="padding-block:14px"><div class="q" style="padding-block:6px;font-size:clamp(19px,3vw,24px)">${qcmQuestion(c)}</div></div>
+  </div>
+  <div class="qcm-opts">${opts.map((o, i) => `<button class="opt" data-id="${o.id}"><span class="l">${"ABCD"[i]}</span><span>${esc(o.s)}</span></button>`).join("")}</div>
+  <div id="fb"></div>`;
+  $("#quit").onclick = () => { stopTimer(); save(); home(); };
+  const t0 = performance.now(), LIM = 10000;
+  stopTimer();
+  (function tk(){ const e = performance.now() - t0, bar = $("#tbar"); if (!bar) return; bar.style.width = Math.max(0, 100 - e / LIM * 100) + "%"; if (e < LIM) timerRAF = requestAnimationFrame(tk); })();
+  app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    stopTimer();
+    const fast = performance.now() - t0 < LIM;
+    const ok = b.dataset.id === c.id;
+    app.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (x.dataset.id === c.id) x.classList.add("good"); });
+    if (!ok) b.classList.add("bad");
+    grade(c.id, ok ? 2 : 0);
+    let gain = 0;
+    if (ok) { Q.score++; gain = 12 + (fast ? 5 : 0); } else Q.wrong.push(c.id);
+    if (gain) addXP(gain);
+    save();
+    $("#fb").innerHTML = `<div class="feedback ${ok ? "" : "ko"} fade-in"><b class="v" style="color:${ok ? "var(--ok)" : "var(--ko)"}">${ok ? (fast ? "Bonne réponse, et rapide !" : "Bonne réponse") : "Pas tout à fait"}</b>
+      <div><b>${c.a}</b></div>${c.d ? `<div style="margin-top:4px">${c.d}</div>` : ""}</div>
+      <button class="go" id="next" style="width:100%;margin-top:12px">${Q.i + 1 < Q.list.length ? "Question suivante" : "Voir mon score"} ${ico("arrow",18)}</button>`;
+    $("#next").onclick = () => { Q.i++; renderQcm(); };
+    $("#next").focus({preventScroll:true});
+    checkBadges();
+  });
+}
+function endQcm(){
+  view = "end"; track("session-qcm"); report("QCM", Q.list.length);
+  const perfect = Q.score === Q.list.length && Q.list.length >= 10;
+  if (perfect) addXP(30);
+  save(); checkBadges({qcmPerfect: perfect});
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Défi QCM terminé</span><h2>${Q.score}/${Q.list.length}${perfect ? " · Sans faute !" : ""}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${Q.score}</b><span>bonnes réponses</span></div>
+      <div class="stat"><b class="k">${Q.wrong.length}</b><span>erreurs</span></div>
+      <div class="stat"><b class="x">+${S.xp - Q.xp0}</b><span>XP gagnés</span></div>
+      <div class="stat"><b>${pct(mastery(CARDS))} %</b><span>maîtrise globale</span></div>
+    </div>
+    ${Q.wrong.length ? `<div class="miss">${Q.wrong.map(i => { const c = byId[i], th = THEMES[c.t]; return `<details style="--c:${th.color}"><summary><span class="ftag">${esc(th.short)}</span>${strip(qcmQuestion(c))}</summary><p><b>${c.a}</b></p></details>`; }).join("")}</div>` : ""}
+    <div class="row">
+      ${Q.wrong.length ? `<button class="go" id="again">${ico("flip",18)} Retravailler mes erreurs en flip cards</button>` : ""}
+      <button class="go alt" id="more">Nouveau défi</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  if (Q.wrong.length) $("#again").onclick = () => startFlip(shuffle(Q.wrong));
+  $("#more").onclick = startQcm;
+  $("#back").onclick = home;
+  if (perfect) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   QUI FAIT QUOI ?
+   ========================================================= */
+let T = null;
+function startTri(kind){
+  const keys = Object.keys(TRI);
+  const k = kind === "mix" || !TRI[kind] ? keys[Math.floor(Math.random() * keys.length)] : kind;
+  T = {kind, k, items: shuffle(TRI[k].items).slice(0, 8), i: 0, score: 0, xp0: S.xp, wrong: [], answered: false, combo: 0};
+  view = "tri"; renderTri();
+}
+function renderTri(){
+  if (T.i >= T.items.length) return endTri();
+  const set = TRI[T.k], it = T.items[T.i];
+  T.answered = false;
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(T.i / T.items.length)}%"></i></div>
+    <span class="sess-count">${T.i + 1}/${T.items.length}</span>
+    <span class="combo">${T.score} pt${T.score > 1 ? "s" : ""}</span>
+  </div>
+  <div class="face fade-in" style="--c:var(--c-inst);min-height:0">
+    <div class="fhead"><span class="ftag">Qui fait quoi ? · ${esc(set.short)}</span><span class="fbox">${T.items.length} éléments</span></div>
+    <div class="ruled" style="padding-block:14px">
+      <p class="tri-consigne">${esc(set.label)}</p>
+      <div class="q" style="padding-block:10px">${esc(it.x)}</div>
+    </div>
+  </div>
+  <div class="tri-cats">${set.cats.map((c, i) => `<button class="cat" data-c="${i}">${esc(c)}<small class="keyhint">touche ${i + 1}</small></button>`).join("")}</div>
+  <div id="fb"></div>`;
+  if (matchMedia("(hover:none)").matches) app.querySelectorAll(".keyhint").forEach(x => x.remove());
+  $("#quit").onclick = () => { save(); home(); };
+  app.querySelectorAll(".cat").forEach(b => b.onclick = () => answerTri(+b.dataset.c));
+}
+function answerTri(ci){
+  if (T.answered) return;
+  T.answered = true;
+  const set = TRI[T.k], it = T.items[T.i], ok = ci === it.c;
+  app.querySelectorAll(".cat").forEach(x => { x.disabled = true; const n = +x.dataset.c; if (n === it.c) x.classList.add("good"); else if (n === ci) x.classList.add("bad"); });
+  if (ok) { T.score++; T.combo++; S.bestStreak = Math.max(S.bestStreak, T.combo); addXP(6); } else { T.combo = 0; T.wrong.push(it); }
+  markDay(); save(); checkBadges();
+  $("#fb").innerHTML = `<div class="feedback ${ok ? "" : "ko"} fade-in"><b class="v" style="color:${ok ? "var(--ok)" : "var(--ko)"}">${ok ? "Bien rangé !" : "Non : " + esc(set.cats[it.c])}</b>${it.e ? esc(it.e) : ""}</div>
+    <button class="go" id="next" style="width:100%;margin-top:12px">${T.i + 1 < T.items.length ? "Élément suivant" : "Voir mon score"} ${ico("arrow",18)}</button>`;
+  $("#next").onclick = () => { T.i++; renderTri(); };
+  $("#next").focus({preventScroll:true});
+}
+function endTri(){
+  view = "end"; track("session-tri"); report("Qui fait quoi", T.items.length);
+  const set = TRI[T.k], perfect = T.score === T.items.length;
+  if (perfect) { addXP(20); S.triPerfect++; }
+  save(); checkBadges();
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Qui fait quoi ? · ${esc(set.short)}</span><h2>${T.score}/${T.items.length}${perfect ? " · Sans erreur !" : ""}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${T.score}</b><span>bien rangés</span></div>
+      <div class="stat"><b class="k">${T.wrong.length}</b><span>erreurs</span></div>
+      <div class="stat"><b class="x">+${S.xp - T.xp0}</b><span>XP gagnés</span></div>
+      <div class="stat"><b>${pct(mastery(CARDS))} %</b><span>maîtrise globale</span></div>
+    </div>
+    ${T.wrong.length ? `<div><h3 style="font-family:var(--f-display);text-transform:uppercase;font-size:20px;margin-bottom:8px">À retenir</h3>
+      <div class="tri-sum">${T.wrong.map(it => `<div><span>${esc(it.x)}</span><b>${esc(set.cats[it.c])}</b></div>`).join("")}</div></div>` : ""}
+    <div class="row">
+      <button class="go" id="again">${ico("loop",18)} Rejouer cette série</button>
+      <button class="go alt" id="mix">Autre série</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  $("#again").onclick = () => startTri(T.k);
+  $("#mix").onclick = () => startTri("mix");
+  $("#back").onclick = home;
+  if (perfect) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   BADGES ET BILAN
+   ========================================================= */
+function badgesView(){ view = "badges"; confirmReset = false; renderBadges(); }
+function renderBadges(){
+  const lv = level(), g = mastery(CARDS);
+  app.innerHTML = `
+  <div class="sess-head"><button class="ghost" id="quit">${ico("back",16)} Accueil</button></div>
+  <section class="bilan fade-in">
+    ${g >= .7 ? `<span class="stamp">Prêt !</span>` : ""}
+    <span class="ftag" style="color:var(--accent)">Bilan de révision · EMC chapitre 1</span>
+    <h2>Mon bilan</h2>
+    <div class="muted" style="font-size:14.5px">Niveau ${lv.n}/${LEVELS.length} · ${esc(lv.name)} · ${S.xp} XP · ${S.reviewed} cartes révisées · ${Object.keys(S.badges).length}/${BADGES.length} badges</div>
+    <div class="tbars">
+      ${Object.entries(THEMES).map(([k, t]) => { const m = mastery(inTheme(k)); return `<div class="tbar" style="--c:${t.color}"><span>${esc(t.label)}</span><div class="mbar"><i style="width:${pct(m)}%"></i></div><b>${pct(m)}%</b></div>`; }).join("")}
+      <div class="tbar" style="--c:var(--ok);font-weight:700"><span>Total</span><div class="mbar"><i style="width:${pct(g)}%"></i></div><b>${pct(g)}%</b></div>
+    </div>
+  </section>
+  <div class="sec-title"><h3>Badges</h3><span class="muted" style="font-size:14px">${Object.keys(S.badges).length} sur ${BADGES.length}</span></div>
+  <div class="badges-grid">
+    ${BADGES.map(b => { const has = !!S.badges[b.id]; return `<div class="bitem${has ? "" : " locked"}">${medal(b, !has)}<div><b>${esc(b.name)}</b><p>${esc(b.desc)}</p></div></div>`; }).join("")}
+  </div>
+  <div class="sec-title"><h3>Recommencer à zéro</h3></div>
+  <div class="confirm-box">
+    ${confirmReset ? `<span>Tout effacer (XP, badges, progression) ?</span><button class="danger" id="yes">Oui, tout effacer</button><button class="ghost" id="no">Annuler</button>`
+      : `<button class="danger" id="reset">Effacer ma progression</button>`}
+  </div>`;
+  $("#quit").onclick = home;
+  if (confirmReset) { $("#yes").onclick = () => { S = fresh(); save(); home(); }; $("#no").onclick = () => { confirmReset = false; renderBadges(); }; }
+  else $("#reset").onclick = () => { confirmReset = true; renderBadges(); };
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Clavier ---------- */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (view === "flip" && F) {
+    if (e.key === " " || e.key === "Enter") { e.preventDefault(); doFlip(); }
+    else if (F.flipped && ["1","2","3"].includes(e.key)) rateFlip(+e.key - 1);
+  } else if (view === "tri" && T && !T.answered) {
+    const n = +e.key;
+    if (n >= 1 && n <= TRI[T.k].cats.length) answerTri(n - 1);
+  }
+});
+
+home();
+reportVisit();
+})();
+</script>
+<!-- Compteur de visites anonyme (GoatCounter, sans cookies) -->
+<script data-goatcounter="https://jeannehg.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
